@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="@dimen/_180sdp"
             android:src="@drawable/splash_logo" />
 
 
@@ -36,27 +36,11 @@
             android:layout_marginTop="30dp"
             />
 
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="By"
-            android:textStyle="bold"
-            android:textSize="@dimen/_18ssp"
-            android:fontFamily="@font/nunito_bold"
-            android:textColor="@color/black"
+            android:background="@drawable/maker"
             android:layout_gravity="center"
-            android:layout_marginTop="160dp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/nunito_bold"
-            android:text="Umer-Dev"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_18ssp"
-            android:textStyle="bold" />
+            android:layout_marginTop="@dimen/_200sdp"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

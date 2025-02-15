@@ -15,7 +15,12 @@ import com.example.aurawall.Models.BomModel
 import com.example.aurawall.Models.CatModel
 import com.example.aurawall.Models.ColorModel
 import com.example.aurawall.databinding.FragmentHomeBinding
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -27,6 +32,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater,container, false)
+
 
         db = FirebaseFirestore.getInstance()
 

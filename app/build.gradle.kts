@@ -46,6 +46,10 @@ dependencies {
 
     implementation ("com.makeramen:roundedimageview:2.3.0")
 
+
+    implementation("com.google.android.gms:play-services-ads:23.6.0")
+
+    
     implementation("androidx.core:core-ktx:1.15.0")
     implementation ("com.intuit.sdp:sdp-android:1.1.0")
     implementation  ("com.intuit.ssp:ssp-android:1.1.0")
