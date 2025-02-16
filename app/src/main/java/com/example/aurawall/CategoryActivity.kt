@@ -3,6 +3,7 @@ package com.example.aurawall
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.aurawall.AdapterClass.CatImagesAdapterClass
 import com.example.aurawall.Models.BomModel
@@ -30,18 +31,21 @@ class CategoryActivity : AppCompatActivity() {
         val uid = intent.getStringExtra("uid")
         val catName = intent.getStringExtra("name")
         binding.catName.text = catName
+        try {
+            db.collection("Category").document(uid!!).collection("Wallpapers")
+                .addSnapshotListener { value, error ->
+                    val listOfWallpaer = arrayListOf<BomModel>()
+                    val data = value?.toObjects(BomModel::class.java)
+                    listOfWallpaer.addAll(data!!)
 
-        db.collection("Category").document(uid!!).collection("Wallpapers")
-            .addSnapshotListener { value, error ->
-                val listOfWallpaer = arrayListOf<BomModel>()
-                val data = value?.toObjects(BomModel::class.java)
-                listOfWallpaer.addAll(data!!)
+                    binding.countOfWallpaper.text = "${listOfWallpaer.size} Wallpapers Available"
 
-                binding.countOfWallpaper.text = "${listOfWallpaer.size} Wallpapers Available"
-
-                binding.rcvCatItems.layoutManager =
-                    StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-                binding.rcvCatItems.adapter = CatImagesAdapterClass(this, listOfWallpaer)
-            }
+                    binding.rcvCatItems.layoutManager =
+                        StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                    binding.rcvCatItems.adapter = CatImagesAdapterClass(this, listOfWallpaer)
+                }
+        } catch (e: Exception) {
+            Toast.makeText(this, "SoneThing Wrong! To fetch Wallpapers", Toast.LENGTH_SHORT).show()
+        }
     }
 }
