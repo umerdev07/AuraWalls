@@ -9,13 +9,16 @@ import com.example.aurawall.AdapterClass.CatImagesAdapterClass
 import com.example.aurawall.Models.BomModel
 import com.example.aurawall.Models.ColorModel
 import com.example.aurawall.databinding.ActivityCategoryBinding
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.firestore.FirebaseFirestore
 
 class CategoryActivity : AppCompatActivity() {
     private val binding: ActivityCategoryBinding by lazy {
         ActivityCategoryBinding.inflate(layoutInflater)
     }
-
+    lateinit var adView :AdView
     override fun onCreate(savedInstanceState: Bundle?) {
         this.window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -24,6 +27,17 @@ class CategoryActivity : AppCompatActivity() {
         supportActionBar?.hide()
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        // Initialize Mobile Ads SDK
+        MobileAds.initialize(this) {}
+
+        // Reference the AdView from XML
+        adView = binding.adView
+
+        // Load an ad
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
+
 
         binding.rcvCatItems.layoutManager
 

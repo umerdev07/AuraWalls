@@ -15,12 +15,16 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.aurawall.databinding.ActivityFinalWallpaperBinding
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.coroutines.*
 import java.io.IOException
 import java.net.URL
@@ -32,7 +36,7 @@ class FinalWallpaper : AppCompatActivity() {
     }
 
     private val STORAGE_PERMISSION_CODE = 101
-
+    lateinit var adView :AdView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.window.setFlags(
@@ -41,6 +45,19 @@ class FinalWallpaper : AppCompatActivity() {
         )
         supportActionBar?.hide()
         setContentView(binding.root)
+
+
+        // Initialize Mobile Ads SDK
+        MobileAds.initialize(this) {}
+
+        // Reference the AdView from XML
+        adView = binding.adView
+
+        // Load an ad
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
+
+
 
         val url = intent.getStringExtra("link") ?: return
         val urlImage = URL(url)

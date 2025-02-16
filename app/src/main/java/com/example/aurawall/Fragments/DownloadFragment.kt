@@ -15,16 +15,30 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.aurawall.AdapterClass.CollectionAdapterClass
 import com.example.aurawall.databinding.FragmentDownloadBinding
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 
 class DownloadFragment : Fragment() {
 
     private lateinit var binding: FragmentDownloadBinding
-
+    private lateinit var adView: AdView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDownloadBinding.inflate(inflater, container, false)
+
+        // Initialize Mobile Ads SDK
+        MobileAds.initialize(requireContext()) {}
+
+        // Reference the AdView from XML
+        adView = binding.adView
+
+        // Load an ad
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
+
 
         if (checkStoragePermission()) {
             loadWallpapers()

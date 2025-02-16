@@ -17,6 +17,7 @@ import com.example.aurawall.Models.CatModel
 import com.example.aurawall.Models.ColorModel
 import com.example.aurawall.databinding.FragmentHomeBinding
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
@@ -27,12 +28,25 @@ class HomeFragment : Fragment() {
 
     lateinit var binding: FragmentHomeBinding
     lateinit var db: FirebaseFirestore
-
+    private lateinit var adView: AdView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
+
+
+        // Initialize Mobile Ads SDK
+        MobileAds.initialize(requireContext()) {}
+
+        // Reference the AdView from XML
+        adView = binding.adView
+
+        // Load an ad
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
+
+
 
 
         db = FirebaseFirestore.getInstance()

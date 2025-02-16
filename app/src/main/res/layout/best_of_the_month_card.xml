@@ -12,6 +12,5 @@
         android:id="@+id/bom_image"
         android:layout_width="@dimen/_110sdp"
         android:layout_height="@dimen/_125sdp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/splashscreenletterbg"/>
+        android:scaleType="centerCrop" />
 </androidx.cardview.widget.CardView>
