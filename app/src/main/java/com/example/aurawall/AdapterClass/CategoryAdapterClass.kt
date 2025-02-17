@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.aurawall.CategoryActivity
@@ -26,16 +27,28 @@ class CategoryAdapterClass(val requireContext: Context, val listOfCategory: Arra
     }
 
     override fun onBindViewHolder(holder: catViewHolder, position: Int) {
-        holder.names.text = listOfCategory[position].name
-        Glide.with(requireContext).load(listOfCategory[position].link).into( holder.image);
+        try {
+            holder.names.text = listOfCategory[position].name
+            Glide.with(holder.itemView.context) // Changed requireContext to holder.itemView.context
+                .load(listOfCategory[position].link)
+                .into(holder.image)
 
             holder.itemView.setOnClickListener {
-                val intent = Intent(requireContext, CategoryActivity::class.java)
-                intent.putExtra("name", listOfCategory[position].name)
-                intent.putExtra("uid", listOfCategory[position].id)
-                requireContext.startActivity(intent)
+                try {
+                    val intent = Intent(holder.itemView.context, CategoryActivity::class.java)
+                    intent.putExtra("name", listOfCategory[position].name)
+                    intent.putExtra("uid", listOfCategory[position].id)
+                    holder.itemView.context.startActivity(intent)
+                } catch (e: Exception) {
+                    Toast.makeText(requireContext, "SomeThing Wrong!", Toast.LENGTH_SHORT).show()
+
+                }
             }
+        } catch (e: Exception) {
+            Toast.makeText(requireContext, "SomeThing Wrong! at admin side", Toast.LENGTH_SHORT).show()
         }
+    }
+
 
     class catViewHolder(Itemview: View): RecyclerView.ViewHolder(Itemview) {
         val names:TextView = itemView.findViewById(R.id.catName)

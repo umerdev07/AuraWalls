@@ -25,15 +25,25 @@ class ColorAdapterClass(
 
     override fun onBindViewHolder(holder: ColorViewHolder, position: Int) {
         val color = listColorTone[position].color
-        holder.colorView.setBackgroundColor(Color.parseColor(color))
+
+        if (!color.isNullOrEmpty()) {
+            try {
+                holder.colorView.setBackgroundColor(Color.parseColor(color))
+            } catch (e: IllegalArgumentException) {
+                holder.colorView.setBackgroundColor(Color.GRAY) // Set a default color
+                e.printStackTrace()
+            }
+        } else {
+            holder.colorView.setBackgroundColor(Color.GRAY) // Default color if empty
+        }
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, FinalWallpaper::class.java)
             intent.putExtra("link", listColorTone[position].link)
             context.startActivity(intent)
         }
-
     }
+
 
     override fun getItemCount(): Int {
         return listColorTone.size

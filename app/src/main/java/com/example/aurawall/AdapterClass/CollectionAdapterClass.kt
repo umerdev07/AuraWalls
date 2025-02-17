@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.aurawall.FinalWallpaper
@@ -23,7 +24,12 @@ class CollectionAdapterClass(val requireContext: Context, val listBestOfMonth: A
     }
 
     override fun onBindViewHolder(holder: CollectionAdapterClass.bomViewHolder, position: Int) {
-        Glide.with(requireContext).load(listBestOfMonth[position]).into(holder.image);
+        try {
+            Glide.with(requireContext).load(listBestOfMonth[position]).into(holder.image)
+        }catch (e:Exception){
+            Toast.makeText(requireContext, "SomeThing Wrong! at admin side", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     override fun getItemCount(): Int {

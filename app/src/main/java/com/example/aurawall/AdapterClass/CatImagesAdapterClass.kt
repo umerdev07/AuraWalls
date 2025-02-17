@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
@@ -26,14 +27,25 @@ class CatImagesAdapterClass(val requireContext: Context, val listBestOfMonth: Ar
     }
 
     override fun onBindViewHolder(holder: CatImagesAdapterClass.bomViewHolder, position: Int) {
-        Glide.with(requireContext).load(listBestOfMonth[position].link).into(holder.image);
+        try {
+            Glide.with(holder.itemView.context)
+                .load(listBestOfMonth[position].link)
+                .into(holder.image)
 
-        holder.itemView.setOnClickListener {
-            val intent = Intent(requireContext, FinalWallpaper::class.java)
-            intent.putExtra("link", listBestOfMonth[position].link)
-            requireContext.startActivity(intent)
+            holder.itemView.setOnClickListener {
+                try {
+                    val intent = Intent(holder.itemView.context, FinalWallpaper::class.java)
+                    intent.putExtra("link", listBestOfMonth[position].link)
+                    holder.itemView.context.startActivity(intent)
+                } catch (e: Exception) {
+                    Toast.makeText(requireContext, "SomeThing Wrong!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        } catch (e: Exception) {
+            Toast.makeText(requireContext, "SomeThing Wrong! at admin side", Toast.LENGTH_SHORT).show()
         }
     }
+
 
     override fun getItemCount(): Int {
         return listBestOfMonth.size
