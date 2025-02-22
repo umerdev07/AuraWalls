@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    tools:context=".FinalWallpaper"
+    android:orientation="vertical"
+    tools:ignore="ExtraText">
+
+    <com.google.android.material.appbar.CollapsingToolbarLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+        <!-- Full-Screen Wallpaper -->
+        <ImageView
+            android:id="@+id/fullBg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:layout_collapseMode="parallax" />
+
+        <!-- Blur Gradient Overlay for Better Contrast -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_overlay"
+            android:layout_gravity="bottom" />
+
+
+    </com.google.android.material.appbar.CollapsingToolbarLayout>x
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/_15sdp">
+
+        <!-- Download Button -->
+        <ImageView
+            android:id="@+id/downloadBtn"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:background="@drawable/downloadybtn" />
+
+        <!-- Banner Ad Placed Between Buttons -->
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_centerInParent="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
+
+        <!-- Apply Button -->
+        <ImageView
+            android:id="@+id/applyBtn"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_40sdp"
+            android:background="@drawable/applybtn" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "212335339990",
+    "project_id": "umerdev07",
+    "storage_bucket": "umerdev07.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:212335339990:android:9e8be33b9dc911427e5c77",
+        "android_client_info": {
+          "package_name": "com.example.aurawall"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOUYIpH_u6u-Mt1IhSQWbMt4qLi6fs-eQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
